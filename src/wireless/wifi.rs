@@ -633,7 +633,25 @@ where
         let mut mdns_task =
             pin!(stack.run_oper_netif_mdns(&self.crypto, &net_stack, &netif, &mut mdns));
 
-        let mut mgr_task = pin!(mgr.run());
+        // Non-concurrent commissioning deferred connect. See the equivalent
+        // comment in the Thread operational task for the full rationale: in
+        // BLE-only commissioning the commissioner's `ConnectNetwork` is deferred
+        // (Wifi can't run during BLE) and must be replayed once the operational
+        // network is up but *before* `CommissioningComplete`. The target network
+        // ID is the one the commissioner selected, remembered in `NetCtlState`.
+        let deferred_connect_id = self.stack.network.net_state.lock(|state| {
+            let state = state.borrow();
+            state.is_prov_ready().then(|| state.network_id.clone())
+        });
+
+        let mut mgr_task = pin!(async {
+            if let Some(network_id) = deferred_connect_id {
+                info!("Non-concurrent commissioning: performing the deferred connect");
+                mgr.connect_once(&network_id).await?;
+            }
+
+            mgr.run().await
+        });
 
         let mut dm_task = pin!(self.stack.run_dm(&dm));
 

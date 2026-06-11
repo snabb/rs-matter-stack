@@ -6,7 +6,7 @@ use edge_nal::{UdpBind, UdpSplit};
 
 use rs_matter::crypto::Crypto;
 use rs_matter::error::{Error, ErrorCode};
-use rs_matter::transport::network::mdns::builtin::BuiltinMdnsResponder;
+use rs_matter::transport::network::mdns::builtin::BuiltinMdns;
 use rs_matter::Matter;
 
 use crate::udp;
@@ -63,7 +63,7 @@ where
     }
 }
 
-impl Mdns for BuiltinMdnsResponder {
+impl Mdns for BuiltinMdns {
     async fn run<C, U>(
         &mut self,
         matter: &Matter<'_>,
@@ -138,7 +138,7 @@ impl Mdns for BuiltinMdnsResponder {
             panic!("Invalid MAC address length: should be 6 or 8 bytes");
         }
 
-        BuiltinMdnsResponder::run(
+        BuiltinMdns::run(
             self,
             udp::Udp(send),
             udp::Udp(recv),
@@ -157,7 +157,7 @@ impl Mdns for BuiltinMdnsResponder {
 }
 
 #[cfg(feature = "zbus")]
-impl Mdns for rs_matter::transport::network::mdns::avahi::AvahiMdnsResponder {
+impl Mdns for rs_matter::transport::network::mdns::avahi::AvahiMdns {
     fn run<C, U>(
         &mut self,
         matter: &Matter<'_>,
@@ -177,7 +177,7 @@ impl Mdns for rs_matter::transport::network::mdns::avahi::AvahiMdnsResponder {
 }
 
 #[cfg(feature = "zbus")]
-impl Mdns for rs_matter::transport::network::mdns::resolve::ResolveMdnsResponder {
+impl Mdns for rs_matter::transport::network::mdns::resolve::ResolveMdns {
     fn run<C, U>(
         &mut self,
         matter: &Matter<'_>,
@@ -197,7 +197,7 @@ impl Mdns for rs_matter::transport::network::mdns::resolve::ResolveMdnsResponder
 }
 
 #[cfg(feature = "zeroconf")]
-impl Mdns for rs_matter::transport::network::mdns::zeroconf::ZeroconfMdnsResponder {
+impl Mdns for rs_matter::transport::network::mdns::zeroconf::ZeroconfMdns {
     fn run<C, U>(
         &mut self,
         matter: &Matter<'_>,
@@ -218,7 +218,7 @@ impl Mdns for rs_matter::transport::network::mdns::zeroconf::ZeroconfMdnsRespond
 
 /// An mDNS responder for Matter using the `astro-dnssd` crate.
 #[cfg(feature = "astro-dnssd")]
-impl Mdns for rs_matter::transport::network::mdns::astro::AstroMdnsResponder {
+impl Mdns for rs_matter::transport::network::mdns::astro::AstroMdns {
     async fn run<C, U>(
         &mut self,
         matter: &Matter<'_>,
