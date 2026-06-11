@@ -81,7 +81,7 @@ use rs_matter_stack::matter::dm::{Async, Dataver, Endpoint, Node};
 use rs_matter_stack::matter::dm::{EmptyHandler, EpClMatcher};
 use rs_matter_stack::matter::error::Error;
 use rs_matter_stack::matter::persist::DirKvBlobStore;
-use rs_matter_stack::matter::transport::network::mdns::zeroconf::ZeroconfMdnsResponder;
+use rs_matter_stack::matter::transport::network::mdns::zeroconf::ZeroconfMdns;
 use rs_matter_stack::matter::utils::init::InitMaybeUninit;
 use rs_matter_stack::matter::{clusters, devices};
 
@@ -159,7 +159,7 @@ fn main() -> Result<(), Error> {
         // Will try to find a default network interface
         UnixNetifs,
         // Will use the mDNS implementation based on the `zeroconf` crate
-        ZeroconfMdnsResponder::new(),
+        ZeroconfMdns::new(),
         // The crypto provider
         &crypto,
         // Our `AsyncHandler` + `AsyncMetadata` impl
