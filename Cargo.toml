@@ -187,7 +187,7 @@ max-exchanges-per-session-3 = ["rs-matter/max-exchanges-per-session-3"]
 
 # General
 log = ["dep:log", "rs-matter/log", "edge-mdns?/log"]
-defmt = ["dep:defmt", "rs-matter/defmt", "heapless/defmt-03", "edge-mdns?/defmt"]
+defmt = ["dep:defmt", "rs-matter/defmt", "heapless/defmt", "edge-mdns?/defmt"]
 sync-mutex = ["rs-matter/sync-mutex"]
 zbus = ["rs-matter/zbus"]
 zeroconf = ["os", "rs-matter/zeroconf"]
@@ -206,13 +206,13 @@ examples = ["log", "os", "nix", "embassy-time-queue-utils/generic-queue-64", "ze
 [dependencies]
 cfg-if = "1"
 log = { version = "0.4", default-features = false, optional = true }
-defmt = { version = "0.3", default-features = false, optional = true, features = ["ip_in_core"] }
-heapless = "0.8"
+defmt = { version = "1", default-features = false, optional = true, features = ["ip_in_core"] }
+heapless = "0.9"
 enumset = { version = "1", default-features = false }
 bitflags = { version =  "2.5", default-features = false }
 scopeguard = { version = "1", default-features = false }
 embassy-futures = "0.1"
-embassy-sync = "0.7"
+embassy-sync = "0.8"
 embassy-time = "0.5"
 rs-matter = { version = "0.1", default-features = false }
 edge-nal = "0.6"
