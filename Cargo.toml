@@ -214,7 +214,7 @@ scopeguard = { version = "1", default-features = false }
 embassy-futures = "0.1"
 embassy-sync = "0.8"
 embassy-time = "0.5"
-rs-matter = { version = "0.1", default-features = false }
+rs-matter = { version = "0.2", default-features = false }
 edge-nal = "0.6"
 edge-nal-std = { version = "0.6", optional = true }
 edge-mdns = { version = "0.7", optional = true }
