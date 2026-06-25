@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Rust
-        uses: dtolnay/rust-toolchain@v1
+        uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ env.RUST_TOOLCHAIN }}
           components: rustfmt, clippy, rust-src
@@ -21,7 +21,18 @@ jobs:
         run: sudo apt-get update -y; sudo apt-get install -y libdbus-1-dev
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: PublishDryRun
         run: cargo publish --dry-run
+
+      - name: Get the crate version from cargo
+        run: |
+          version=$(cargo metadata --format-version=1 --no-deps | jq -r ".packages[] | select(.name == \"${{env.CRATE_NAME}}\") | .version")
+          echo "crate_version=$version" >> $GITHUB_ENV
+          echo "${{env.CRATE_NAME}} version: $version"
+
+      - name: Tag the new release (dry run)
+        run: |
+          echo "Would create tag: v${{env.crate_version}}"
+          echo "Would use message: Release v${{env.crate_version}}"

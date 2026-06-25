@@ -1,6 +1,6 @@
 # ![alt text](https://avatars.githubusercontent.com/u/61027988?s=48&v=4 "rs-matter-stack") Easily configure and run [rs-matter](https://github.com/project-chip/rs-matter)
 
-[![CI](https://github.com/ivmarkov/rs-matter-stack/actions/workflows/ci.yml/badge.svg)](https://github.com/ivmarkov/rs-matter-stack/actions/workflows/ci.yml)
+[![CI](https://github.com/sysgrok/rs-matter-stack/actions/workflows/ci.yml/badge.svg)](https://github.com/sysgrok/rs-matter-stack/actions/workflows/ci.yml)
 [![crates.io](https://img.shields.io/crates/v/rs-matter-stack.svg)](https://crates.io/crates/rs-matter-stack)
 [![Matrix](https://img.shields.io/matrix/matter-rs:matrix.org?label=join%20matrix&color=BEC5C9&logo=matrix)](https://matrix.to/#/#matter-rs:matrix.org)
 
@@ -10,7 +10,7 @@ Configuring the [`rs-matter`](https://github.com/project-chip/rs-matter) crate i
 
 Furthermore, _operating_ the assembled Matter stack is also challenging, as various features might need to be switched on or off depending on whether Matter is running in commissioning or operating mode, and also depending on the current network connectivity (as in e.g. Wifi signal lost).
 
-**This crate addresses these issues by providing an all-in-one [`MatterStack`](https://github.com/ivmarkov/rs-matter-stack/blob/master/src/lib.rs) assembly that configures `rs-matter` for reliable operation.**
+**This crate addresses these issues by providing an all-in-one `MatterStack` assembly that configures `rs-matter` for reliable operation.**
 
 Instantiate it and then call `MatterStack::<...>::run(...)`.
 
@@ -29,9 +29,9 @@ You need to provide platform-specific implementations of the following traits fo
   - For STD, `rs-matter-stack` provides `DirKvBlobStore`.
 - `NetifDiag` - network interface abstraction (i.e. monitoring when the network interface is up or down, and what is its IP configuration).
   - For Unix-like OSes, `rs-matter` provides `UnixNetifs`, which uses a simple polling every 2 seconds to detect changes to the network interface.
-  - Note that For IP (TCP & UDP) IO, the stack uses the [`edge-nal`](https://github.com/ivmarkov/edge-net/tree/master/edge-nal) crate, and is thus compatible with [`STD`](https://github.com/ivmarkov/edge-net/tree/master/edge-nal-std) and [`Embassy`](https://github.com/ivmarkov/edge-net/tree/master/edge-nal-embassy) out of the box. You only need to worry about networking IO if you use other platforms than these two.
-- Implementation of the UDP traits from [edge-nal](https://github.com/ivmarkov/edge-net/tree/master/edge-nal).
-  - There are out-of-the-box implementations for [Rust STD BSD sockets](https://github.com/ivmarkov/edge-net/tree/master/edge-nal-std) as well as for [`embassy-net`](https://github.com/ivmarkov/edge-net/tree/master/edge-nal-embassy) and for [OpenThread](https://github.com/ivmarkov/esp-openthread/blob/main/openthread/src/enal.rs).
+  - Note that For IP (TCP & UDP) IO, the stack uses the [`edge-nal`](https://github.com/sysgrok/edge-net/tree/master/edge-nal) crate, and is thus compatible with [`STD`](https://github.com/sysgrok/edge-net/tree/master/edge-nal-std) and [`Embassy`](https://github.com/sysgrok/edge-net/tree/master/edge-nal-embassy) out of the box. You only need to worry about networking IO if you use other platforms than these two.
+- Implementation of the UDP traits from [edge-nal](https://github.com/sysgrok/edge-net/tree/master/edge-nal).
+  - There are out-of-the-box implementations for [Rust STD BSD sockets](https://github.com/sysgrok/edge-net/tree/master/edge-nal-std) as well as for [`embassy-net`](https://github.com/sysgrok/edge-net/tree/master/edge-nal-embassy) and for [OpenThread](https://github.com/sysgrok/esp-openthread/blob/main/openthread/src/enal.rs).
 - `GattPeripheral` - BLE GATT peripheral abstraction of the device radio. Not necessary for Ethernet connectivity
   - For Linux, `rs-matter` provides `BluerGattPeripheral`, which uses the Linux BlueZ BT stack.
 - `NetCtl` - Wifi controller implementation when using Wifi connectivity (Thread has a built-in one in OpenThread).
@@ -39,11 +39,11 @@ You need to provide platform-specific implementations of the following traits fo
 
 ## Embassy
 
-The [`rs-matter-embassy`](https://github.com/ivmarkov/rs-matter-embassy) crate provides implementations for `KvBlobStore`, `NetifDiag`, `NetCtl`, `GattPeripheral` and others for the [`embassy`](https://github.com/embassy-rs/embassy) framework.
+The [`rs-matter-embassy`](https://github.com/sysgrok/rs-matter-embassy) crate provides implementations for `KvBlobStore`, `NetifDiag`, `NetCtl`, `GattPeripheral` and others for the [`embassy`](https://github.com/embassy-rs/embassy) framework.
 
 ## ESP-IDF
 
-The [`esp-idf-matter`](https://github.com/ivmarkov/esp-idf-matter) crate provides implementations for `KvBlobStore`, `NetifDiag`, `GattPeripheral` and others for the [ESP-IDF SDK](https://github.com/esp-rs/esp-idf-svc).
+The [`esp-idf-matter`](https://github.com/sysgrok/esp-idf-matter) crate provides implementations for `KvBlobStore`, `NetifDiag`, `GattPeripheral` and others for the [ESP-IDF SDK](https://github.com/esp-rs/esp-idf-svc).
 
 ## Example
 
@@ -97,7 +97,7 @@ use static_cell::StaticCell;
 ///
 /// If - for your platform - this size is not enough, increase it until
 /// the program runs without panics during the stack initialization.
-const BUMP_SIZE: usize = 20000;
+const BUMP_SIZE: usize = 23500;
 
 fn main() -> Result<(), Error> {
     env_logger::init_from_env(

@@ -23,7 +23,7 @@ jobs:
 
     steps:
       - name: Rust
-        uses: dtolnay/rust-toolchain@v1
+        uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ env.RUST_TOOLCHAIN }}
           components: rustfmt, clippy, rust-src
@@ -35,7 +35,7 @@ jobs:
         run: sudo apt-get install -y libavahi-client-dev
 
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Fmt
         run: cargo fmt -- --check

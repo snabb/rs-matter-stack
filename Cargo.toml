@@ -10,16 +10,7 @@ description = "Utility for configuring and running rs-matter"
 repository = "https://github.com/sysgrok/rs-matter-stack"
 license = "MIT OR Apache-2.0"
 readme = "README.md"
-rust-version = "1.77"
-
-[patch.crates-io]
-#rs-matter = { git = "https://github.com/project-chip/rs-matter" }
-rs-matter = { git = "https://github.com/sysgrok/rs-matter", branch = "next" }
-#rs-matter = { path = "../rs-matter/rs-matter" }
-# The new edge-net (with `UdpSplitMulticast` is not released yet.
-edge-nal = { git = "https://github.com/sysgrok/edge-net" }
-edge-nal-std = { git = "https://github.com/sysgrok/edge-net" }
-edge-mdns = { git = "https://github.com/sysgrok/edge-net" }
+rust-version = "1.87"
 
 [profile.dev]
 debug = true
@@ -216,9 +207,9 @@ embassy-futures = "0.1"
 embassy-sync = "0.8"
 embassy-time = "0.5"
 rs-matter = { version = "0.2", default-features = false }
-edge-nal = "0.6"
-edge-nal-std = { version = "0.6", optional = true }
-edge-mdns = { version = "0.7", optional = true }
+edge-nal = "0.7"
+edge-nal-std = { version = "0.7", optional = true }
+edge-mdns = { version = "0.8", optional = true }
 rand_core06 = { package = "rand_core", version = "0.6" }
 rand_core09 = { package = "rand_core", version = "0.9" }
 rand_chacha = { version = "0.9", default-features = false }
