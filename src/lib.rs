@@ -119,30 +119,30 @@ cfg_if! {
 }
 
 cfg_if! {
-    if #[cfg(feature = "events-ringbuf-size-0")] {
+    if #[cfg(feature = "events-ringbuf-size-2048")] {
         /// Events ringbuf size
-        const EVENTS_RINGBUF_SIZE: usize = 0;
-    } else if #[cfg(feature = "events-ringbuf-size-64")] {
-        /// Events ringbuf size
-        const EVENTS_RINGBUF_SIZE: usize = 64;
-    } else if #[cfg(feature = "events-ringbuf-size-128")] {
-        /// Events ringbuf size
-        const EVENTS_RINGBUF_SIZE: usize = 128;
-    } else if #[cfg(feature = "events-ringbuf-size-256")] {
-        /// Events ringbuf size
-        const EVENTS_RINGBUF_SIZE: usize = 256;
-    } else if #[cfg(feature = "events-ringbuf-size-512")] {
-        /// Events ringbuf size
-        const EVENTS_RINGBUF_SIZE: usize = 512;
+        const EVENTS_RINGBUF_SIZE: usize = 2048;
     } else if #[cfg(feature = "events-ringbuf-size-1024")] {
         /// Events ringbuf size
         const EVENTS_RINGBUF_SIZE: usize = 1024;
-    } else if #[cfg(feature = "events-ringbuf-size-2048")] {
+    } else if #[cfg(feature = "events-ringbuf-size-512")] {
         /// Events ringbuf size
-        const EVENTS_RINGBUF_SIZE: usize = 2048;
-    } else {
+        const EVENTS_RINGBUF_SIZE: usize = 512;
+    } else if #[cfg(feature = "events-ringbuf-size-256")] {
+        /// Events ringbuf size
+        const EVENTS_RINGBUF_SIZE: usize = 256;
+    } else if #[cfg(feature = "events-ringbuf-size-128")] {
+        /// Events ringbuf size
+        const EVENTS_RINGBUF_SIZE: usize = 128;
+    } else if #[cfg(feature = "events-ringbuf-size-64")] {
+        /// Events ringbuf size
+        const EVENTS_RINGBUF_SIZE: usize = 64;
+    } else if #[cfg(feature = "events-ringbuf-size-0")] {
         /// Events ringbuf size
         const EVENTS_RINGBUF_SIZE: usize = 0;
+    } else {
+        /// Events ringbuf size
+        const EVENTS_RINGBUF_SIZE: usize = 256;
     }
 }
 
